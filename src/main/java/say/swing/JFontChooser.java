@@ -20,23 +20,7 @@ import java.awt.event.WindowEvent;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ActionMap;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.InputMap;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -93,10 +77,37 @@ public class JFontChooser extends JComponent
 	protected int dialogResultValue = ERROR_OPTION;
 	private ResourceBundle messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
 
+	private void flushLocaleUI() {
+		UIManager.put("FileChooser.openDialogTitleText", msg("FileChooser.openDialogTitleText"));
+		UIManager.put("FileChooser.lookInLabelText", msg("FileChooser.lookInLabelText"));
+		UIManager.put("FileChooser.openButtonText", msg("FileChooser.openButtonText"));
+		UIManager.put("FileChooser.cancelButtonText", msg("FileChooser.cancelButtonText"));
+		UIManager.put("FileChooser.fileNameLabelText", msg("FileChooser.fileNameLabelText"));
+		UIManager.put("FileChooser.filesOfTypeLabelText", msg("FileChooser.filesOfTypeLabelText"));
+		UIManager.put("FileChooser.openButtonToolTipText", msg("FileChooser.openButtonToolTipText"));
+		UIManager.put("FileChooser.cancelButtonToolTipText",msg("FileChooser.cancelButtonToolTipText"));
+		UIManager.put("FileChooser.fileNameHeaderText",msg("FileChooser.fileNameHeaderText"));
+		UIManager.put("FileChooser.upFolderToolTipText", msg("FileChooser.upFolderToolTipText"));
+		UIManager.put("FileChooser.homeFolderToolTipText",msg("FileChooser.homeFolderToolTipText"));
+		UIManager.put("FileChooser.newFolderToolTipText",msg("FileChooser.newFolderToolTipText"));
+		UIManager.put("FileChooser.listViewButtonToolTipText",msg("FileChooser.listViewButtonToolTipText"));
+		UIManager.put("FileChooser.newFolderButtonText",msg("FileChooser.newFolderButtonText"));
+		UIManager.put("FileChooser.renameFileButtonText", msg("FileChooser.renameFileButtonText"));
+		UIManager.put("FileChooser.deleteFileButtonText", msg("FileChooser.deleteFileButtonText"));
+		UIManager.put("FileChooser.filterLabelText", msg("FileChooser.filterLabelText"));
+		UIManager.put("FileChooser.detailsViewButtonToolTipText", msg("FileChooser.detailsViewButtonToolTipText"));
+		UIManager.put("FileChooser.fileSizeHeaderText",msg("FileChooser.fileSizeHeaderText"));
+		UIManager.put("FileChooser.fileDateHeaderText", msg("FileChooser.fileDateHeaderText"));
+		UIManager.put("FileChooser.foldersLabelText", msg("FileChooser.foldersLabelText"));
+		UIManager.put("FileChooser.filesLabelText", msg("FileChooser.filesLabelText"));
+		SwingUtilities.updateComponentTreeUI(this);
+	}
+	
     @Override
     public void setLocale(Locale l) {
         super.setLocale(l);
         messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
+		flushLocaleUI();
     }
 
     protected String msg(String key)

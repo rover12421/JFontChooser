@@ -1,5 +1,5 @@
 group 'com.rover12421.opensource'
-version '1.0.5'
+version '1.0.5-1'
 
 apply plugin: 'java'
 apply plugin: 'maven'
