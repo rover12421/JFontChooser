@@ -7,6 +7,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.rover12421.opensource:JFontChooser:1.0.5-2'
+    compile 'com.rover12421.opensource:JFontChooser:1.0.5-3'
 }
 ```

@@ -77,39 +77,6 @@ public class JFontChooser extends JComponent
 	protected int dialogResultValue = ERROR_OPTION;
 	private ResourceBundle messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
 
-	private void flushLocaleUI() {
-		UIManager.put("FileChooser.openDialogTitleText", msg("FileChooser.openDialogTitleText"));
-		UIManager.put("FileChooser.lookInLabelText", msg("FileChooser.lookInLabelText"));
-		UIManager.put("FileChooser.openButtonText", msg("FileChooser.openButtonText"));
-		UIManager.put("FileChooser.cancelButtonText", msg("FileChooser.cancelButtonText"));
-		UIManager.put("FileChooser.fileNameLabelText", msg("FileChooser.fileNameLabelText"));
-		UIManager.put("FileChooser.filesOfTypeLabelText", msg("FileChooser.filesOfTypeLabelText"));
-		UIManager.put("FileChooser.openButtonToolTipText", msg("FileChooser.openButtonToolTipText"));
-		UIManager.put("FileChooser.cancelButtonToolTipText",msg("FileChooser.cancelButtonToolTipText"));
-		UIManager.put("FileChooser.fileNameHeaderText",msg("FileChooser.fileNameHeaderText"));
-		UIManager.put("FileChooser.upFolderToolTipText", msg("FileChooser.upFolderToolTipText"));
-		UIManager.put("FileChooser.homeFolderToolTipText",msg("FileChooser.homeFolderToolTipText"));
-		UIManager.put("FileChooser.newFolderToolTipText",msg("FileChooser.newFolderToolTipText"));
-		UIManager.put("FileChooser.listViewButtonToolTipText",msg("FileChooser.listViewButtonToolTipText"));
-		UIManager.put("FileChooser.newFolderButtonText",msg("FileChooser.newFolderButtonText"));
-		UIManager.put("FileChooser.renameFileButtonText", msg("FileChooser.renameFileButtonText"));
-		UIManager.put("FileChooser.deleteFileButtonText", msg("FileChooser.deleteFileButtonText"));
-		UIManager.put("FileChooser.filterLabelText", msg("FileChooser.filterLabelText"));
-		UIManager.put("FileChooser.detailsViewButtonToolTipText", msg("FileChooser.detailsViewButtonToolTipText"));
-		UIManager.put("FileChooser.fileSizeHeaderText",msg("FileChooser.fileSizeHeaderText"));
-		UIManager.put("FileChooser.fileDateHeaderText", msg("FileChooser.fileDateHeaderText"));
-		UIManager.put("FileChooser.foldersLabelText", msg("FileChooser.foldersLabelText"));
-		UIManager.put("FileChooser.filesLabelText", msg("FileChooser.filesLabelText"));
-		SwingUtilities.updateComponentTreeUI(this);
-	}
-	
-    @Override
-    public void setLocale(Locale l) {
-        super.setLocale(l);
-        messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
-		flushLocaleUI();
-    }
-
     protected String msg(String key)
 	{
 		String value = key;
@@ -145,12 +112,22 @@ public class JFontChooser extends JComponent
 		this(DEFAULT_FONT_SIZE_STRINGS);
 	}
 
+	public JFontChooser(Locale locale) {
+		this(DEFAULT_FONT_SIZE_STRINGS, locale);
+	}
+
 	/**
 	 * Constructs a <code>JFontChooser</code> object using the given font size array.
 	 * @param fontSizeStrings  the array of font size string.
 	 **/
-	public JFontChooser(String[] fontSizeStrings)
+	public JFontChooser(String[] fontSizeStrings) {
+		this(fontSizeStrings, Locale.getDefault());
+	}
+	public JFontChooser(String[] fontSizeStrings, Locale locale)
 	{
+		setLocale(locale);
+		messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
+
 		if (fontSizeStrings == null)
 		{
 			fontSizeStrings = DEFAULT_FONT_SIZE_STRINGS;
